@@ -26,23 +26,28 @@
 // # 0 <= strs[i].length <= 200
 // # strs[i] consists of only lowercase English letters if it is non-empty.
 
+// Completed
 
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
         string ans = "";
-
-        if(strs.empty()){
-            return ans;
-        }
-
+        int count = 0;
 
         for (int l = 0; l < strs[0].size(); l++){
             for (int w = 1; w < strs.size(); w++){
-                if ((strs[w][l] == strs[0][l]) && (w+1 == strs.size())){
-                    ans = ans + strs[w][l];
+                if (strs[w][l] == strs[0][l]){
+                    count++;
                 }
             }
+            if (count == strs.size()-1){
+                ans = ans + strs[0][l];
+            }
+            else{
+                return ans;
+            }
+            count = 0;
+            
         }
         return ans;
     }
