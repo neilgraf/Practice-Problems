@@ -32,8 +32,7 @@
 // -100 <= Node.val <= 100
 // Both list1 and list2 are sorted in non-decreasing order.
 
-// In Progress
-
+// Completed
 
 /**
  * Definition for singly-linked list.
@@ -48,46 +47,22 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode dummy(0);
+        ListNode* tail = &dummy;
 
-        ListNode* head(nullptr);
-        ListNode* temp(nullptr);
-
-        if(list1 == nullptr && list2 == nullptr){
-            return list1;
-        }
-
-        while(list1->next != nullptr || list2->next != nullptr){
+        while(list1 != nullptr && list2 != nullptr){
             if(list1->val <= list2->val){
-                temp = list1->next;
-                list1->next = head;
-                head = list1;
-                list1 = temp;
+                tail->next = list1;
+                list1 = list1->next;
             }
             else{
-                temp = list2->next;
-                list2->next = head;
-                head = list2;
-                list2 = temp;
+                tail->next = list2;
+                list2 = list2->next;
             }
+            tail = tail->next;
         }
+        tail->next = (list1 != nullptr) ? list1 : list2;
 
-        if(list1->next == nullptr){
-            while(list2->next != nullptr){
-                temp = list2->next;
-                list2->next = head;
-                head = list2;
-                list2 = temp;
-            }
-        }
-        else{
-            while(list1->next != nullptr){
-                temp = list1->next;
-                list1->next = head;
-                head = list1;
-                list1 = temp;
-            }
-        }
-
-        return head;
+        return dummy.next;
     }
 };
