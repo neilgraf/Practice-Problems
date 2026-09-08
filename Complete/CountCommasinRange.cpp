@@ -42,4 +42,8 @@
 // 1 <= n <= 105
 
 
+<<<<<<< HEAD
 // Completed
+=======
+// Test
+>>>>>>> Create
